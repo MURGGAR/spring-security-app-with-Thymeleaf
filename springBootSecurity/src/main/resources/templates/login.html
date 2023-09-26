@@ -55,7 +55,7 @@
     <div class="form-container">
         <h2>User Entity Form</h2>
 
-        <h2 th:if="${error}"></h2>
+        <h2 th:if="${error}"> check your login details</h2>
 
         <form th:action=@{/perform_login} method="post"> <!-- Replace 'submit.php' with your form handling script -->
             <input type="hidden" th:name="_csrf.parameterName" th:value="_csrf.token">

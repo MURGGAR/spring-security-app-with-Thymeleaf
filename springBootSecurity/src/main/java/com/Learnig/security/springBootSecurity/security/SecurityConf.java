@@ -63,7 +63,7 @@ public class SecurityConf {
                 .formLogin(log -> log.loginPage("/login")
                         .loginProcessingUrl("/perform_login")
                         .defaultSuccessUrl("/home")
-                        // .failureUrl("/login?error=true")
+                         .failureUrl("/login?error=true")
                         .permitAll())
                 .rememberMe(re -> re.tokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(21)).key("lovecolourspin"))
                 .logout(logoutt -> logoutt.logoutUrl("/logout")

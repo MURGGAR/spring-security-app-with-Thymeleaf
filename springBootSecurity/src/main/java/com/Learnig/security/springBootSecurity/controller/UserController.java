@@ -75,6 +75,7 @@ public class UserController {
     public ModelAndView login() {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("login");
+//        mv.addObject("error", error);
         return mv;
     }
 
