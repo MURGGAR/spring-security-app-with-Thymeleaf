@@ -1,31 +1,21 @@
 # Start with a base image containing Java runtime (AdoptOpenJDK)
 FROM adoptopenjdk:17-jre-hotspot AS build
 
-# Set the working directory in the image to "/app"
+# Use an official OpenJDK runtime as a parent image
+FROM openjdk:17-jre-slim
+
+# Set the working directory in the container
 WORKDIR /app
 
-# Copy the Maven wrapper files
-COPY mvnw ./
-COPY .mvn ./.mvn
+# Copy the JAR file into the container at /app
+COPY target/springBootSecurity.jar /app/springBootSecurity.jar
 
-# Copy the project Object Model (POM) and install the dependencies
-COPY pom.xml .
-RUN ./mvnw dependency:go-offline
+# Expose the port that your Spring Boot application listens on (default is 8080)
+EXPOSE 8080
 
-# Copy the application source code
-COPY src ./src
+# Define environment variables (if needed)
+# ENV VARIABLE_NAME=value
 
-# Build the application with Maven
-RUN ./mvnw package
+# Command to run your Spring Boot application
+CMD ["java", "-jar", "springBootSecurity.jar"]
 
-# Set up a second stage for the final image
-FROM adoptopenjdk:17-jre-hotspot
-
-# Set the working directory to '/app'
-WORKDIR /app
-
-# Copy the compiled JAR file from the build stage
-COPY --from=build /app/target/*.jar app.jar
-
-# Set the startup command to execute the JAR
-CMD ["java", "-jar", "app.jar"]
