@@ -1,6 +1,3 @@
-# Start with a base image containing Java runtime (AdoptOpenJDK)
-FROM adoptopenjdk:17-jre-hotspot AS build
-
 # Use an official OpenJDK runtime as a parent image
 FROM openjdk:17-jre-slim
 
